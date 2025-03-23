@@ -38,17 +38,21 @@ class TrelloPage(BasePage):
 
 
 
-    # def delete_card(self):
-    #     # сперва хочу положить карточку в архив
-    #     created_card_name = self.CARD_VALUE  # ссылаюсь на только что созданную карточку
-    #     self.wait_for_selector_and_click_right_click(f'text={created_card_name}')
-    #     self.wait_for_selector_and_click(DeleteCardConstants.MOVE_TO_ARCHIVE_ELEMENT_SELECTOR.value)
-    #
-    #     # попытка открыть меню справа через три точки
-    #     self.wait_for_selector_and_click(DeleteCardConstants.OPEN_OVERFLOW_MENU_HORIZONTAL_ICON_BUTTON_SELECTOR.value)
-    #     self.wait_for_selector_and_click(DeleteCardConstants.ARCHIVE_BUTTON_IN_HORIZONTAL_MENU_SELECTOR.value)
-    #     self.wait_for_selector_and_click(DeleteCardConstants.DELETE_FROM_ARCHIVE_BUTTON_SELECTOR.value)
-    #     self.wait_for_selector_and_click(DeleteCardConstants.DELETE_CONFIRM_BUTTON_SELECTOR.value)
+    def delete_card(self):
+        # при сразу открытом окне справа
+        element = self.page.query_selector(DeleteCardConstants.CLOSE_HORIZONTAL_MENU_SELECTOR.value)
+        if element:
+            element.click()
+        # сперва хочу положить карточку в архив
+        created_card_name = self.CARD_VALUE  # ссылаюсь на только что созданную карточку
+        self.wait_for_selector_and_click_right_click(f'text={created_card_name}')
+        self.wait_for_selector_and_click(DeleteCardConstants.MOVE_TO_ARCHIVE_ELEMENT_SELECTOR.value)
+
+        # попытка открыть меню справа через три точки
+        self.wait_for_selector_and_click(DeleteCardConstants.OPEN_OVERFLOW_MENU_HORIZONTAL_ICON_BUTTON_SELECTOR.value)
+        self.wait_for_selector_and_click(DeleteCardConstants.ARCHIVE_BUTTON_IN_HORIZONTAL_MENU_SELECTOR.value)
+        self.wait_for_selector_and_click(DeleteCardConstants.DELETE_FROM_ARCHIVE_BUTTON_SELECTOR.value)
+        self.wait_for_selector_and_click(DeleteCardConstants.DELETE_CONFIRM_BUTTON_SELECTOR.value)
 
 
 
