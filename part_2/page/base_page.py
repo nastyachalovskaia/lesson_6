@@ -23,6 +23,10 @@ class BasePage:
         self.page.wait_for_selector(selector)
         self.page.click(selector)
 
+    def wait_for_selector_and_click_right_click(self, selector):
+        self.page.wait_for_selector(selector)
+        self.page.click(selector, button='right')
+
     def wait_for_selector_and_fill(self, selector, value):
         self.page.wait_for_selector(selector)
         self.page.fill(selector, value)
