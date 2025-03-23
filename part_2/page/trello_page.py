@@ -29,8 +29,13 @@ class TrelloPage(BasePage):
         self.assert_element_is_visible(MoveCardConstants.HAS_MOVEMENT_CARD_HEADER_SELECTOR.value)
         # пробую подвинуть мешающее окно с надписью "Моя доска Trello"
         self.wait_for_selector_and_click(MoveCardConstants.PLACE_TO_CLICK_TO_CHANGE_FOCUS_SELECTOR.value) # клик на пустое место
-        self.assert_element_is_visible(MoveCardConstants.MOVEMENT_LIST_DESTINATION_SELECTOR.value) # это нужный селектор для вызова вариантов перемещения из списка
+        # теперь можно кликать на селектор перемещения
+        self.assert_element_is_visible(MoveCardConstants.MOVEMENT_LIST_DESTINATION_SELECTOR.value)
         self.wait_for_selector_and_click(MoveCardConstants.MOVEMENT_LIST_DESTINATION_SELECTOR.value)
+        # попытка выбрать селектор "В процессе"
+        self.wait_for_selector_and_click(MoveCardConstants.CHOOSE_IN_PROGRESS_VALUE_SELECTOR.value)
+        self.wait_for_selector_and_click(MoveCardConstants.MOVE_BUTTON_IN_OTHER_COLUMN_SELECTOR.value)
+
 
 
     # def delete_card(self):
