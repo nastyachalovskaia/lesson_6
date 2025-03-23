@@ -12,5 +12,5 @@ def test_checkout_order(browser):
     login_page.login('a3371188@gmail.com', 'Scra[chyE%esX2')
     home_page.direct_to_trello()
     trello_page.create_card()
-    # trello_page.move_card()
-    trello_page.delete_card()
+    trello_page.move_card()
+    # trello_page.delete_card()
