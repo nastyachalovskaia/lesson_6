@@ -1,7 +1,7 @@
 import pytest
 import requests
 
-from api_trello_testing.constants import BASE_URL, HEADERS
+from part_1.constants import BASE_URL, HEADERS
 
 
 @pytest.fixture(scope="session")
@@ -19,7 +19,7 @@ def auth_session():
     return session
 
 @pytest.fixture()
-def create_card(auth_session):
+def create_card(auth_session, id_list, card_name="Новая карточка"):
 
     create_card = auth_session.post(f"{BASE_URL}/cards", json={})
     assert create_card.status_code == 200

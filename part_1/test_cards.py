@@ -1,4 +1,4 @@
-from api_trello_testing.constants import BASE_URL
+from part_1.constants import BASE_URL
 
 
 def test_create_booking(self):
