@@ -1,23 +1,30 @@
+import time
+
 from part_1.constants import BASE_URL
 
 
-def test_create_booking(self):
-    auth = create_booking
+def test_create_card(trello_auth_session, trello_get_list_id, trello_create_card, trello_card_data, delete_trello_card):
+    id_list = trello_get_list_id
 
-    get_booking = auth_session.get(f"{BASE_URL}")
-    assert get_booking.status_code == 200, "Ошибка при получении данных бронирования"
+    card_data = trello_card_data
 
-    booking_data_response = get_booking.json()
-    assert booking_data_response['firstname'] == booking_data['firstname'], "Имя не совпадает с заданным"
-    assert booking_data_response['lastname'] == booking_data['lastname'], "Фамилия не совпадает с заданной"
-    assert booking_data_response['totalprice'] == booking_data['totalprice'], "Цена не совпадает с заданной"
-    assert booking_data_response['depositpaid'] == booking_data['depositpaid'], "Статус депозита не совпадает"
-    assert booking_data_response['bookingdates']['checkin'] == booking_data['bookingdates'][
-        'checkin'], "Дата заезда не совпадает"
-    assert booking_data_response['bookingdates']['checkout'] == booking_data['bookingdates'][
-        'checkout'], "Дата выезда не совпадает"
+    assert card_data['id'], "Отсутствует ID карточки"
+    assert card_data['name'] == trello_create_card['name'], f"Название должно быть '{trello_create_card['name']}'"
+    assert card_data['desc'] == trello_create_card['desc'], f"Описание должно быть '{trello_create_card['desc']}'"
+    assert card_data['idList'] == id_list, f"Карточка должна быть в списке {id_list}"
 
-    delete_booking(auth)
+    is_deleted = delete_trello_card(card_data['id'])  # Получаем результат удаления
+    assert is_deleted is True, "Карточка не была удалена"
 
-    get_deleted_booking = auth_session.get(f"{BASE_URL}/booking/{auth}")
-    assert get_deleted_booking.status_code == 404, "Букинг не был удален"
+def test_change_card(trello_auth_session, trello_get_list_id, trello_card_data):
+    id_list = trello_get_list_id
+
+    updated_card_data = trello_card_data.copy()
+    updated_card_data.update({
+        "id": trello_card_data['id'],
+        "name": f"updated_card {int(time.time())}",
+        "desc": "Новое описание",
+        "idList": id_list
+    })
+    update_card = trello_auth_session.put(f"{BASE_URL}/1/cards/{trello_card_data.get('id')}", json=updated_card_data)
+    assert update_card.status_code == 200, "Ошибка при обновлении данных карточки"
