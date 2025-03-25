@@ -13,9 +13,6 @@ def test_create_card(trello_auth_session, trello_get_list_id, trello_create_card
     assert card_data['desc'] == trello_create_card['desc'], f"Описание должно быть '{trello_create_card['desc']}'"
     assert card_data['idList'] == id_list, f"Карточка должна быть в списке {id_list}"
 
-    is_deleted = delete_trello_card(card_data['id'])  # Получаем результат удаления
-    assert is_deleted is True, "Карточка не была удалена"
-
 def test_change_card(trello_auth_session, trello_get_list_id, trello_card_data):
     id_list = trello_get_list_id
 
@@ -28,3 +25,9 @@ def test_change_card(trello_auth_session, trello_get_list_id, trello_card_data):
     })
     update_card = trello_auth_session.put(f"{BASE_URL}/1/cards/{trello_card_data.get('id')}", json=updated_card_data)
     assert update_card.status_code == 200, "Ошибка при обновлении данных карточки"
+
+def test_delete_card(trello_auth_session, trello_card_data, delete_trello_card):
+    card_data = trello_card_data
+    is_deleted = delete_trello_card(card_data['id'])
+    assert is_deleted is True, "Карточка не была удалена"
+
