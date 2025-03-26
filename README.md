@@ -10,3 +10,4 @@
     - python -m pytest test/test_order.py - для API тестирования
     -  python -m pytest part_2/test/test_card.py - для UI тестирования
 8) В конце деактивируйте виртуальное окружение командой deactivate
+9) Для просмотра результата отчётов пользоваться командой allure serve allure-results

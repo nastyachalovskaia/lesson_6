@@ -1,8 +1,12 @@
 import time
 
+import allure
+
 from part_1.constants import BASE_URL
 
 
+@allure.feature("Card creating tests")
+@allure.story("Create the card")
 def test_create_card(trello_auth_session, trello_get_list_id, trello_create_card, trello_card_data, delete_trello_card):
     id_list = trello_get_list_id
 
@@ -13,6 +17,8 @@ def test_create_card(trello_auth_session, trello_get_list_id, trello_create_card
     assert card_data['desc'] == trello_create_card['desc'], f"Описание должно быть '{trello_create_card['desc']}'"
     assert card_data['idList'] == id_list, f"Карточка должна быть в списке {id_list}"
 
+@allure.feature("Card updating tests")
+@allure.story("Update the card")
 def test_change_card(trello_auth_session, trello_get_list_id, trello_card_data):
     id_list = trello_get_list_id
 
@@ -26,6 +32,8 @@ def test_change_card(trello_auth_session, trello_get_list_id, trello_card_data):
     update_card = trello_auth_session.put(f"{BASE_URL}/1/cards/{trello_card_data.get('id')}", json=updated_card_data)
     assert update_card.status_code == 200, "Ошибка при обновлении данных карточки"
 
+@allure.feature("Card deleting tests")
+@allure.story("Delete the card")
 def test_delete_card(trello_auth_session, trello_card_data, delete_trello_card):
     card_data = trello_card_data
     is_deleted = delete_trello_card(card_data['id'])

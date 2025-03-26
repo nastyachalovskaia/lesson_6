@@ -1,5 +1,7 @@
 import time
 
+import allure
+
 from part_2.page.base_page import BasePage
 from part_2.utils.move_card_constants import *
 from part_2.utils.delete_card_constants import *
@@ -13,6 +15,7 @@ class TrelloPage(BasePage):
     EXPECTED_URL = "https://trello.com/"
     CARD_VALUE = f"[@etoznado] Тестовая карточка {int(time.time())}"
 
+    @allure.step("Card creating")
     def create_card(self):
         self.wait_for_load()
         self.wait_for_selector_and_click(CreateCardConstants.TRELLO_BOARDS_SELECTOR.value)
@@ -22,6 +25,7 @@ class TrelloPage(BasePage):
         self.wait_for_selector_and_fill(CreateCardConstants.TRELLO_ADD_CARD_NAME_SELECTOR.value, self.CARD_VALUE)
         self.wait_for_selector_and_click(CreateCardConstants.TRELLO_ADD_CARD_SELECTOR.value)
 
+    @allure.step("Move the card")
     def move_card(self):
         created_card_name = self.CARD_VALUE
         self.wait_for_selector_and_click_right_click(f'text={created_card_name}')
@@ -36,8 +40,7 @@ class TrelloPage(BasePage):
         self.wait_for_selector_and_click(MoveCardConstants.CHOOSE_IN_PROGRESS_VALUE_SELECTOR.value)
         self.wait_for_selector_and_click(MoveCardConstants.MOVE_BUTTON_IN_OTHER_COLUMN_SELECTOR.value)
 
-
-
+    @allure.step("Deleting the card")
     def delete_card(self):
         # при сразу открытом окне справа
         element = self.page.query_selector(DeleteCardConstants.CLOSE_HORIZONTAL_MENU_SELECTOR.value)

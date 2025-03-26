@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import sync_playwright
 
 from part_2.page.base_page import BasePage
@@ -11,6 +12,7 @@ class HomePage(BasePage):
         super().__init__(page)
         self._endpoint = ''
 
+    @allure.step("Opening the home page Atlassian")
     def direct_to_trello(self):
         self.wait_for_load()
         self.wait_for_exact_url("https://home.atlassian.com/**")
