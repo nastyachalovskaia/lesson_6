@@ -17,7 +17,7 @@ def test_trello_cards_operations(browser):
     trello_page.move_card()
     trello_page.delete_card()
 
-with open("config.json") as f:
+with open("part_2/config.json") as f:
     config = json.load(f)
 
 USERNAME = config["trello"]["username"]

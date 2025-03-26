@@ -7,6 +7,6 @@
 5) после активации окружения появляется имя окружения (см.картинку)
 6) Установить зависимости командой: pip install -r requirements.txt
 7) Чтобы запустить проект, необходимо воспользоваться командами: 
-    - python -m pytest test/test_order.py
-    -
+    - python -m pytest test/test_order.py - для API тестирования
+    -  python -m pytest part_2/test/test_card.py - для UI тестирования
 8) В конце деактивируйте виртуальное окружение командой deactivate

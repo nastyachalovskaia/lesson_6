@@ -16,7 +16,7 @@ class HomePage(BasePage):
         self.wait_for_exact_url("https://home.atlassian.com/**")
         self.assert_to_have_url_with_re(self.HOME_URL_ATLASSIAN)
         self.wait_for_selector_and_click(self.CLOSE_MODAL_WINDOW)
-        self.wait_for_selector_and_click('div.css-kjzctc >> text="Trello"')
+        self.wait_for_selector_and_click('div.css-1r14e9v >> text="Trello"')
         self.wait_for_exact_url("https://trello.com/")
         self.assert_to_have_url_with_re("https://trello.com/")
 
