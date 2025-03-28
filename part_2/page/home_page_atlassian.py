@@ -1,6 +1,4 @@
 import allure
-from playwright.sync_api import sync_playwright
-
 from part_2.page.base_page import BasePage
 
 

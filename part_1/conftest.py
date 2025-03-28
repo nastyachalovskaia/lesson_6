@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import pytest
 import requests
 
-from part_1.constants import BASE_URL, HEADERS
+from part_1.constants import BASE_URL
 from part_1.utils.board_util import TrelloBoard
 from part_1.utils.card_util import TrelloCardUtils
 

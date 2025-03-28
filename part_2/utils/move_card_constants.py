@@ -1,5 +1,6 @@
 import enum
 
+
 class MoveCardConstants(enum.Enum):
     CHOOSE_IN_PROGRESS_VALUE_SELECTOR = 'div[role="option"]:has-text("В процессе") li'
 
